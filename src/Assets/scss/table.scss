@@ -2,8 +2,44 @@
     padding: 4rem ;
     overflow: hidden;
     height: 80vh;
-    .css-1s0hp0k-MuiDataGrid-columnHeadersInner{
-        width: 100%;
-        background-color: red;
-    }
+    background: transparent !important;
+ 
+}
+.table{
+    background: #FAFAFA;
+    box-shadow: 0px 6px 53px rgba(0, 0, 0, 0.19);
+    border-top-right-radius: 31px;
+    border-top-left-radius: 31px;
+    border: none;
+    overflow: hidden;
+
+}
+thead{
+ border: none;
+}
+thead tr{
+        background: #D91F26;
+   
+}
+thead th{
+    font-family: 'Poppins',sans-serif !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    line-height: 19px !important;
+
+    color: #FFFFFF !important;
+}
+.table th , td{
+    padding-left: 2rem !important;
+    font-family: 'Poppins',sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #3F3E3E;
+}
+th:nth-child(1){
+    text-align: start !important;
 }

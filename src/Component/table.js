@@ -1,26 +1,26 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 100 },
-  { field: 'firstName', headerName: 'First name', width: 250 },
-  { field: 'lastName', headerName: 'Last name', width: 250 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 100,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 250,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-];
+// const columns = [
+//   { field: 'id', headerName: 'ID', width: 100 },
+//   { field: 'firstName', headerName: 'First name', width: 250 },
+//   { field: 'lastName', headerName: 'Last name', width: 250 },
+//   {
+//     field: 'age',
+//     headerName: 'Age',
+//     type: 'number',
+//     width: 100,
+//   },
+//   {
+//     field: 'fullName',
+//     headerName: 'Full name',
+//     description: 'This column has a value getter and is not sortable.',
+//     sortable: false,
+//     width: 250,
+//     valueGetter: (params) =>
+//       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+//   },
+// ];
 
 const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -37,13 +37,30 @@ const rows = [
 export default function DataTable() {
   return (
     <div className='tablearea'>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-       
-      />
+           <table className="table table-striped" >
+            <thead>
+                <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Active</th>
+                <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            { rows.map((rows) => ( 
+                <tr   key={rows.id} >
+                <th scope="row">{rows.lastName}</th>
+                <td>{rows.firstName}</td>
+                <td> {rows.lastName}</td>
+                <td>Active</td>
+                <td>{rows.age}</td>
+               
+                </tr>
+                      ))}   
+            </tbody>
+    
+            </table>
     </div>
   );
 }
