@@ -1,10 +1,18 @@
 .tablearea{
-    padding: 4rem ;
-    overflow: hidden;
-    height: 80vh;
+    margin: 2rem;
+    padding: 2rem;
+    overflow-y: scroll;
+    height: 78vh;
     background: transparent !important;
  
 }
+.tablearea::-webkit-scrollbar {
+    width: 5px;
+  }
+  .tablearea::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 10px;
+  }
 .table{
     background: #FAFAFA;
     box-shadow: 0px 6px 53px rgba(0, 0, 0, 0.19);

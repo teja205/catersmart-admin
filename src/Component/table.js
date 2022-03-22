@@ -1,26 +1,8 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import {useState, useEffect} from "react";
+// import {getTableData} from "../api/components/services";
 
-// const columns = [
-//   { field: 'id', headerName: 'ID', width: 100 },
-//   { field: 'firstName', headerName: 'First name', width: 250 },
-//   { field: 'lastName', headerName: 'Last name', width: 250 },
-//   {
-//     field: 'age',
-//     headerName: 'Age',
-//     type: 'number',
-//     width: 100,
-//   },
-//   {
-//     field: 'fullName',
-//     headerName: 'Full name',
-//     description: 'This column has a value getter and is not sortable.',
-//     sortable: false,
-//     width: 250,
-//     valueGetter: (params) =>
-//       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-//   },
-// ];
+
 
 const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -34,10 +16,62 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
+
 export default function DataTable() {
+
+const [user, setUser] = useState([])
+const result = user.data;
+
+const fetchData = () => {
+  fetch("https://stg-backend.catersmart.in/api/userlogs_details")
+    .then(response => {
+      return response.json()
+    })
+    .then(res => {
+      setUser(res);
+      console.log(user,"users");
+      console.log(user.data,"message");
+      console.log(result,"result")
+      console.log(rows,"rows");
+      
+    })
+};
+
+useEffect(() => {
+  fetchData()
+}, []);
+
   return (
     <div className='tablearea'>
            <table className="table table-striped" >
+            <thead>
+                <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Action</th>
+                <th scope="col">Status</th>
+                </tr>
+            </thead>
+          
+            <tbody>
+            { result.map((result) => ( 
+                <tr key={result._id} >
+                <th scope="result">{result.name}</th>
+                <td>{result.email}</td>
+                <td> {result.phone}</td>
+                <td>{result.action}</td>
+                <td>{result.time}</td>
+               
+                </tr>
+                ))}   
+            </tbody>
+          
+    
+            </table>
+
+{/*        
+            <table className="table table-striped" >
             <thead>
                 <tr>
                 <th scope="col">Name</th>
@@ -47,20 +81,23 @@ export default function DataTable() {
                 <th scope="col">Status</th>
                 </tr>
             </thead>
+           
             <tbody>
-            { rows.map((rows) => ( 
-                <tr   key={rows.id} >
-                <th scope="row">{rows.lastName}</th>
-                <td>{rows.firstName}</td>
-                <td> {rows.lastName}</td>
-                <td>Active</td>
-                <td>{rows.age}</td>
-               
+          
+            {user && user.map((user) => ( 
+                <tr   key={user.data._id} >
+                <th >{user.data.name}</th>
+                <td>{user.data.email}</td>
+                <td> {user.data.phone}</td>
+                <td>{user.data.action}</td>
+                <td>20</td>
                 </tr>
                       ))}   
             </tbody>
+          
     
-            </table>
+            </table> */}
+           
     </div>
   );
 }
