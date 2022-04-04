@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from "react";
-// import {getTableData} from "../api/components/services";
+//  import {getTableData} from "../api/components/services";
 
 
 
@@ -32,13 +32,15 @@ const fetchData = () => {
       console.log(user,"users");
       console.log(user.data,"message");
       console.log(result,"result")
-      console.log(rows,"rows");
+ 
       
     })
 };
 
 useEffect(() => {
   fetchData()
+  console.log(result,"tableData")
+  console.log(rows,"rows");
 }, []);
 
   return (
@@ -70,8 +72,8 @@ useEffect(() => {
     
             </table>
 
-{/*        
-            <table className="table table-striped" >
+       
+            {/* <table className="table table-striped" >
             <thead>
                 <tr>
                 <th scope="col">Name</th>
@@ -82,18 +84,18 @@ useEffect(() => {
                 </tr>
             </thead>
            
-            <tbody>
+            <tbody> */}
           
-            {user && user.map((user) => ( 
-                <tr   key={user.data._id} >
-                <th >{user.data.name}</th>
-                <td>{user.data.email}</td>
-                <td> {user.data.phone}</td>
-                <td>{user.data.action}</td>
+            {/* {user && user.map((users) => ( 
+                <tr   key={users.data._id} >
+                <th >{users.data.name}</th>
+                <td>{users.data.email}</td>
+                <td> {users.data.phone}</td>
+                <td>{users.data.action}</td>
                 <td>20</td>
                 </tr>
-                      ))}   
-            </tbody>
+                      ))}    */}
+            {/* </tbody>
           
     
             </table> */}

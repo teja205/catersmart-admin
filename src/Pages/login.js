@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from "../api/components/Authprovider";
+import { useHistory } from 'react-router-dom';
 
 import axios from '../api/axios';
 const LOGIN_URL = '/superadmin_login';
@@ -13,10 +14,17 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         userRef.current.focus();
     }, [])
+
+    useEffect(() =>{
+        if(localStorage.getItem('user-info')){
+            history.push("/home")
+        }
+    },[])
 
     useEffect(() => {
         setErrMsg('');
@@ -25,34 +33,19 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ email, password }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ email, password, roles, accessToken });
-            setEmail('');
-            setPassword('');
-            setSuccess(true);
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
-        }
+      console.warn(email,password);
+      let item = {email,password};
+      let result = await fetch("https://stg-backend.catersmart.in/api/superadmin_login" , {
+          method : 'POST',
+          headers: {
+              "Content-Type":"application/json",
+              "Accept": "application/json"
+          },
+          body : JSON.stringify(item)
+      });
+      result = await result.json();
+      localStorage.setItem("user-info", JSON.stringify(result))
+      history.push("/home")
     }
 
     return (
