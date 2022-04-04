@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter ,Routes ,Switch, Route } from 'react-router-dom'
 import Home from '../Pages/Home'
 import Login from '../Pages/login'
+import ProtectedRoute from '../Pages/ProtectedRoutes'
 
 export class Router extends Component {
   render() {
@@ -15,7 +16,10 @@ export class Router extends Component {
           </Routes> */}
           <Switch>
           <Route exact path="/" component={Login}  />
-          <Route exact path="/home" component={Home} />
+         
+         <Route exact path="/home"  >
+            <ProtectedRoute  component={Home} />
+         </Route>
       
           </Switch>
         </BrowserRouter>
