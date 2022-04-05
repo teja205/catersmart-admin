@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from "../api/components/Authprovider";
 import { useHistory } from 'react-router-dom';
+import { assetsImages } from '../Constant/images';
 
 import axios from '../api/axios';
 const LOGIN_URL = '/superadmin_login';
@@ -60,9 +61,19 @@ const Login = () => {
                 </section>
             ) : (
 
-                <section >
+                <section className='row justify-content-center align-items-center'>
+                    <div className='col-6'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Sign In</h1>
+                    <div
+                         className="loginlogo"
+                    >
+                        <img
+                            src={assetsImages.loginLogo}
+                            alt="Catersmart Logo"
+                            /> 
+                    </div>
+                 
+                    {/* <h1>Sign In</h1> */}
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">Username:</label>
                         <input
@@ -85,6 +96,8 @@ const Login = () => {
                         />
                         <button>Sign In</button>
                     </form>
+                    </div>
+                
                
                 </section>
             )}
