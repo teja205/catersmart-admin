@@ -23,7 +23,7 @@ const AdminLogin = () => {
 
     useEffect(() =>{
         if(localStorage.getItem('user-info')){
-            history.push("/home")
+            history.push("/cateringprofile")
         }
     },[])
 
@@ -36,7 +36,7 @@ const AdminLogin = () => {
 
       console.warn(email,password);
       let item = {email,password};
-      let result = await fetch("https://stg-backend.catersmart.in/api/superadmin_login" , {
+      let result = await fetch("https://stg-backend.catersmart.in/api/caterer_login" , {
           method : 'POST',
           headers: {
               "Content-Type":"application/json",
@@ -46,7 +46,7 @@ const AdminLogin = () => {
       });
       result = await result.json();
       localStorage.setItem("user-info", JSON.stringify(result))
-      history.push("/home")
+      history.push("/cateringprofile")
     }
 
     return (
