@@ -3,7 +3,7 @@ import AuthContext from "../api/components/Authprovider";
 import { useHistory } from 'react-router-dom';
 import { assetsImages } from '../Constant/images';
 
-import axios from '../api/axios';
+// import axios from '../api/axios';
 const LOGIN_URL = '/superadmin_login';
 
 const AdminLogin = () => {
