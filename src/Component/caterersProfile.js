@@ -1,6 +1,8 @@
 import React , { useCallback, useEffect, useRef, useState }  from "react";
 import {Multiselect} from "multiselect-react-dropdown";
 import { assetsImages } from '../Constant/images';
+import Select from 'react-select';
+import {getCategories }from '../api/services';
 
 
 const CatererProfile = () => {
@@ -12,16 +14,14 @@ const CatererProfile = () => {
 
 
 
-    const [category, setCategory] = useState([])
+    const [category, setCategory] = useState({})
     const [cateringType, setCateringType] = useState([])
     const result = category.data;
 
 
 useEffect(() => {
-  // fetchUserLogs() 
   fetchData()
-  // console.log(result,"tableData")
-  // console.log(rows,"rows");
+ 
 }, []);
 
 const fetchData = () => {
@@ -30,13 +30,13 @@ const fetchData = () => {
       return response.json()
     })
     .then(res => {
-      setCategory(res);
+      setCategory(res.result);
       console.log(category,"Categories");
-      setCateringType(res.CateringType)
-      console.log(cateringType,"cateringType")
- 
+      setCateringType(res.result.cateringtype);
+      console.log(cateringType,"CateringType");
       
     })
+
 };
   
 
@@ -200,7 +200,13 @@ const [cateringoptions] = useState(data)
                
            
                 <div className="select">
-                    <Multiselect options={cateringoptions} displayValue = "CateringType" />
+                  <Select 
+                    isMulti
+                    placeholder="Select Option"
+                    options ={data}
+                    displayValue = "CateringType" 
+                  />
+                    <Multiselect options={data} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />

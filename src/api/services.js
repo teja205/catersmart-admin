@@ -17,3 +17,13 @@ export function uploadHairstyle(data, onUploadProgress) {
       method: "GET",
     });
   }
+
+  export function getCategories() {
+    return baseApi({
+      url: "caterer_option",
+      method: "GET",
+    });
+  }
+
+
+ 
