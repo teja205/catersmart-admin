@@ -9,6 +9,35 @@ const CatererProfile = () => {
     const [videoFile, setVideoFile] = useState([]);
     const [previewVideo, setPreviewVideo] = useState([]);
     const [gifs, setGifs] = useState([]);
+
+
+
+    const [category, setCategory] = useState([])
+    const [cateringType, setCateringType] = useState([])
+    const result = category.data;
+
+
+useEffect(() => {
+  // fetchUserLogs() 
+  fetchData()
+  // console.log(result,"tableData")
+  // console.log(rows,"rows");
+}, []);
+
+const fetchData = () => {
+  fetch("https://stg-backend.catersmart.in/api/caterer_option")
+    .then(response => {
+      return response.json()
+    })
+    .then(res => {
+      setCategory(res);
+      console.log(category,"Categories");
+      setCateringType(res.CateringType)
+      console.log(cateringType,"cateringType")
+ 
+      
+    })
+};
   
 
 const data = [
