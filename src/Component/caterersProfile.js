@@ -3,24 +3,31 @@ import {Multiselect} from "multiselect-react-dropdown";
 import { assetsImages } from '../Constant/images';
 import Select from 'react-select';
 import {getCategories }from '../api/services';
+import axios from "axios";
 
 
 const CatererProfile = () => {
+    const userRef = useRef();
+    const errRef = useRef();
     const photoUploadRef = useRef();
+    const [email, setEmail] = useState('');
+    const [name,setName] = useState("");
+    const [location,setLocation] = useState("")
     const [photos, setPhotos] = useState([]);
     const [videoFile, setVideoFile] = useState([]);
     const [previewVideo, setPreviewVideo] = useState([]);
     const [gifs, setGifs] = useState([]);
-
-
-
     const [category, setCategory] = useState({})
     const [cateringType, setCateringType] = useState([])
-    const result = category.data;
+    const [corporarteEvent, setCorporarteEvent] = useState([])
+    const [dietary, setDietary] = useState([])
+    const [vendortype, setVendortype] = useState([])
 
+    
 
 useEffect(() => {
   fetchData()
+  // submitForm()
  
 }, []);
 
@@ -32,7 +39,7 @@ const fetchData = () => {
     .then(res => {
       setCategory(res.result);
       console.log(category,"Categories");
-      setCateringType(res.result.cateringtype);
+      // setCateringType(res.result.cateringtype);
       console.log(cateringType,"CateringType");
       
     })
@@ -108,10 +115,38 @@ const onFileChange = (e) => {
   };
 
 
+  const submitForm = async(e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("location", location);
+    formData.append("file", photos);
+    formData.append("cateringType", cateringType);
+    formData.append("dietary", dietary);
+    formData.append("vendortype", vendortype);
+    console.log(formData,"formdata")
+
+  
+    axios
+      .post("https://stg-backend.catersmart.in/api/update_caterer", formData)
+      .then((res) => {
+        alert("File Upload success");
+        console.log(res,'response')
+      })
+      .catch((err) => alert("File Upload Error",err)
+     
+      );
+      
+  };
+
+
 const [cateringoptions] = useState(data)
     return(
         <div className="profile">
-            <form>
+            <form 
+              onSubmit={submitForm} 
+            >
                 <div className="row justify-content-between">
                     <div className="col-3 imgUpload">
                         <input
@@ -128,90 +163,49 @@ const [cateringoptions] = useState(data)
                         <div className="image"> 
                             <img src={photos} alt="imgpreview"/>
                         </div>
-                        <button onClick={onBrowsePhoto}>
+                        {/* <button onClick={onBrowsePhoto}>
                             <img
                                 src={assetsImages.uploadIcon}
                                 alt="Catersmart Logo"
                                 /> 
-                        </button>
-
-
-{/* <div className="custom-input-box">
-              <div>
-                {photos && photos.length > 0 ? (
-                  <>
-                    <div
-                      className="close-icon-container"
-                  
-                    >
-                    
-                    </div>
-                    <div className="slide-show-container">
-                      {photos.map((photo) => {
-                        console.log(photos);
-                        return (
-                          <>
-                            <img
-                              src={URL.createObjectURL(photo)}
-                              width={"100%"}
-                            />
-                          </>
-                        );
-                      })}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    
-                    <p className="title-txt">Upload Face Image</p>
-                    <input
-                      hidden
-                      type="file"
-                      multiple
-                      name={"photo"}
-                      accept={"image/*"}
-                      ref={photoUploadRef}
-                      onChange={onFileChange}
-                      text="BROWSE"
-                      key={File.name}
-                    />
-                    <div
-                      className="browse-button button"
-                      onClick={onBrowsePhoto}
-                    >
-                      <p>BROWSE</p>
-                    </div>
-                    <p className="size-txt">Maximum size 25MB</p>
-                  </>
-                )}
-              </div>
-            </div> */}
+                        </button> */}
                     </div>
                     <div className="col-8 row inputs">
                         <label>Email</label>
-                        <input className="col-12" type="email" />
+                        <input className="col-12" type="email" 
+                           value={email}
+                           onChange={(e) => setEmail(e.target.value)}
+                        />
                         <label>Name</label>
-                        <input className="col-12"  type="text" />
+                        <input className="col-12"  type="text" 
+                         value={name}
+                         onChange={(e) => setName(e.target.value)}
+                        />
                         <label>Location</label>
-                        <input className="col-12"  type="text" />
+                        <input className="col-12"  type="text"
+                         value={location}
+                         onChange={(e) => setLocation(e.target.value)}
+                        />
                     </div>
                 </div>
                
                
            
                 <div className="select">
-                  <Select 
-                    isMulti
-                    placeholder="Select Option"
-                    options ={data}
-                    displayValue = "CateringType" 
-                  />
-                    <Multiselect options={data} displayValue = "CateringType" />
+                    <Multiselect options={data} displayValue = "CateringType" value={cateringType}
+                       onChange={(e) => {setCateringType(e.target.value)}}
+                    />
+                   
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
                 </div>
+         
+               
+                  <button className="btn btn-primary p-4"
+                 
+                  > Submit</button>
             </form>
         </div>
     );
