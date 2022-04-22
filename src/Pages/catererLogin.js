@@ -23,7 +23,7 @@ const AdminLogin = () => {
 
     useEffect(() =>{
         if(localStorage.getItem('user-info')){
-            history.push("/cateringprofile")
+            history.push("/caterer")
         }
     },[])
 
@@ -46,7 +46,7 @@ const AdminLogin = () => {
       });
       result = await result.json();
       localStorage.setItem("user-info", JSON.stringify(result))
-      history.push("/cateringprofile")
+      history.push("/caterer")
     }
 
     return (
