@@ -6,8 +6,7 @@ import {getCategories }from '../api/services';
 import axios from "axios";
 import Catererselect from "./catererselect"
 
-
-const CatererProfile = () => {
+export default function CatererProfile(){
     const userRef = useRef();
     const errRef = useRef();
     const photoUploadRef = useRef();
@@ -28,22 +27,123 @@ const CatererProfile = () => {
 
 useEffect(() => {
   fetchData()
-
- 
+  // renderData()
 }, []);
 
 
+
+// const fetchData = async () => {
+//   const response = await fetch(
+//     "https://stg-backend.catersmart.in/api/caterer_option"
+//   );
+//   const data = await response.json();
+//   setCategory(data.data);
+//   setCateringType(data.data.cateringtype)
+//   console.log(category,'category')
+//   console.log(cateringType,'cater')
+// };
 
 const fetchData = async () => {
   const response = await fetch(
     "https://stg-backend.catersmart.in/api/caterer_option"
   );
   const data = await response.json();
-  setCategory(data.data);
-  setCateringType(data.data.cateringtype)
-  console.log(category,'category')
-  console.log(cateringType,'cater')
+  setCategory(data);
+  console.log(category,"category")
 };
+
+
+// const renderData = async () => {
+//   const API = await axios.get('https://stg-backend.catersmart.in/api/caterer_option')
+//   const serverResponse = API.data.result
+//   const cateringTypeResponse = API.data.result.cateringtype
+//   const corporarteEventResponse = API.data.result.corporateEvent
+//   const cuisineResponse = API.data.result.cuisine
+//   const dietaryResponse = API.data.result.dietary
+//   const dishResponse = API.data.result.dish
+//   const vendorResponse = API.data.result.vendortype
+//   const logisticResponse = API.data.result.logistic
+
+//   console.log(cateringType,"cateringtype")
+//   console.log(serverResponse,"response")
+//   console.log(cateringTypeResponse,"cateringresponse")
+//   console.log(corporarteEventResponse,"eventresponse")
+//   console.log(cuisineResponse,"cuisineresponse")
+//   console.log(dietaryResponse,"dietaryResponse")
+//   console.log(dishResponse,"dietaryResponse")
+//   console.log(logisticResponse,"logisticResponse")
+
+//   const cateringType = cateringTypeResponse.map((response) => ({
+//     "value" : response._id,
+//     "label" : response.filterName
+//   }))
+//   const  corporateEvent = corporarteEventResponse.map((response) => ({
+//       "value" : response._id,
+//       "label" : response.filterName
+//     }))
+//   const  cuisines = cuisineResponse.map((response) => ({
+//       "value" : response._id,
+//       "label" : response.filterName
+//     }))
+//   const  dietary = dietaryResponse.map((response) => ({
+//       "value" : response._id,
+//       "label" : response.filterName
+//     }))  
+//   const  dish = dishResponse.map((response) => ({
+//       "value" : response._id,
+//       "label" : response.filterName
+//     })) 
+//   const  vendortype= vendorResponse.map((response) => ({
+//       "value" : response._id,
+//       "label" : response.filterName
+//     })) 
+//   const  logistictype= logisticResponse.map((response) => ({
+//       "value" : response._id,
+//       "label" : response.name
+//     })) 
+    
+    
+   
+
+
+//   this.setState(
+//     {
+//       cateringTypeoptions: cateringType
+//     }
+//   )
+
+//   this.setState(
+//       {
+//         corporateEventoptions: corporateEvent
+//       }
+//     )
+//     this.setState(
+//       {
+//         cuisineoptions: cuisines
+//       }
+//     )
+//     this.setState(
+//       {
+//         dietaryoptions: dietary
+//       }
+//     )
+//     this.setState(
+//       {
+//         dishoptions: dish
+//       }
+//     )
+//     this.setState(
+//       {
+//         vendoroptions: vendortype
+//       }
+//     )
+//     this.setState(
+//       {
+//         logisticoptions: logistictype
+//       }
+//     )
+// }
+
   
 
 const data = [
@@ -192,11 +292,11 @@ const [cateringoptionsr] = useState(cateringType)
                
            
                 <div className="select">
-                    <Multiselect options={cateringoptions} displayValue = "CateringType"
+                    {/* <Multiselect options={cateringoptions} displayValue = "CateringType"
                        value={cateringType}
                        onChange={(e) => {setCateringType(e.target.value)}}
-                    />
-                    {/* <Catererselect /> */}
+                    /> */}
+                    <Catererselect />
                    
                     {/* <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
@@ -213,4 +313,4 @@ const [cateringoptionsr] = useState(cateringType)
     );
 }
 
-export default CatererProfile;
+// export default CatererProfile;
