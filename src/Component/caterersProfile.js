@@ -4,6 +4,7 @@ import { assetsImages } from '../Constant/images';
 import Select from 'react-select';
 import {getCategories }from '../api/services';
 import axios from "axios";
+import Catererselect from "./catererselect"
 
 
 const CatererProfile = () => {
@@ -17,7 +18,7 @@ const CatererProfile = () => {
     const [videoFile, setVideoFile] = useState([]);
     const [previewVideo, setPreviewVideo] = useState([]);
     const [gifs, setGifs] = useState([]);
-    const [category, setCategory] = useState({})
+    const [category, setCategory] = useState([])
     const [cateringType, setCateringType] = useState([])
     const [corporarteEvent, setCorporarteEvent] = useState([])
     const [dietary, setDietary] = useState([])
@@ -27,23 +28,21 @@ const CatererProfile = () => {
 
 useEffect(() => {
   fetchData()
-  // submitForm()
+
  
 }, []);
 
-const fetchData = () => {
-  fetch("https://stg-backend.catersmart.in/api/caterer_option")
-    .then(response => {
-      return response.json()
-    })
-    .then(res => {
-      setCategory(res.result);
-      console.log(category,"Categories");
-      // setCateringType(res.result.cateringtype);
-      console.log(cateringType,"CateringType");
-      
-    })
 
+
+const fetchData = async () => {
+  const response = await fetch(
+    "https://stg-backend.catersmart.in/api/caterer_option"
+  );
+  const data = await response.json();
+  setCategory(data.data);
+  setCateringType(data.data.cateringtype)
+  console.log(category,'category')
+  console.log(cateringType,'cater')
 };
   
 
@@ -142,6 +141,7 @@ const onFileChange = (e) => {
 
 
 const [cateringoptions] = useState(data)
+const [cateringoptionsr] = useState(cateringType)
     return(
         <div className="profile">
             <form 
@@ -192,14 +192,16 @@ const [cateringoptions] = useState(data)
                
            
                 <div className="select">
-                    <Multiselect options={data} displayValue = "CateringType" value={cateringType}
+                    <Multiselect options={cateringoptions} displayValue = "CateringType"
+                       value={cateringType}
                        onChange={(e) => {setCateringType(e.target.value)}}
                     />
+                    {/* <Catererselect /> */}
                    
+                    {/* <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
-                    <Multiselect options={cateringoptions} displayValue = "CateringType" />
-                    <Multiselect options={cateringoptions} displayValue = "CateringType" />
+                    <Multiselect options={cateringoptions} displayValue = "CateringType" /> */}
                 </div>
          
                
