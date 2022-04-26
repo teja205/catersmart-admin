@@ -104,12 +104,12 @@ export default class catererselect extends React.Component {
       }
      
       onChange(event){
+        this.props.func();
        this.setState(
          {
            id: event.value, 
            options: event.label
           },
-     
         )
       }
      

@@ -53,96 +53,6 @@ const fetchData = async () => {
 };
 
 
-// const renderData = async () => {
-//   const API = await axios.get('https://stg-backend.catersmart.in/api/caterer_option')
-//   const serverResponse = API.data.result
-//   const cateringTypeResponse = API.data.result.cateringtype
-//   const corporarteEventResponse = API.data.result.corporateEvent
-//   const cuisineResponse = API.data.result.cuisine
-//   const dietaryResponse = API.data.result.dietary
-//   const dishResponse = API.data.result.dish
-//   const vendorResponse = API.data.result.vendortype
-//   const logisticResponse = API.data.result.logistic
-
-//   console.log(cateringType,"cateringtype")
-//   console.log(serverResponse,"response")
-//   console.log(cateringTypeResponse,"cateringresponse")
-//   console.log(corporarteEventResponse,"eventresponse")
-//   console.log(cuisineResponse,"cuisineresponse")
-//   console.log(dietaryResponse,"dietaryResponse")
-//   console.log(dishResponse,"dietaryResponse")
-//   console.log(logisticResponse,"logisticResponse")
-
-//   const cateringType = cateringTypeResponse.map((response) => ({
-//     "value" : response._id,
-//     "label" : response.filterName
-//   }))
-//   const  corporateEvent = corporarteEventResponse.map((response) => ({
-//       "value" : response._id,
-//       "label" : response.filterName
-//     }))
-//   const  cuisines = cuisineResponse.map((response) => ({
-//       "value" : response._id,
-//       "label" : response.filterName
-//     }))
-//   const  dietary = dietaryResponse.map((response) => ({
-//       "value" : response._id,
-//       "label" : response.filterName
-//     }))  
-//   const  dish = dishResponse.map((response) => ({
-//       "value" : response._id,
-//       "label" : response.filterName
-//     })) 
-//   const  vendortype= vendorResponse.map((response) => ({
-//       "value" : response._id,
-//       "label" : response.filterName
-//     })) 
-//   const  logistictype= logisticResponse.map((response) => ({
-//       "value" : response._id,
-//       "label" : response.name
-//     })) 
-    
-    
-   
-
-
-//   this.setState(
-//     {
-//       cateringTypeoptions: cateringType
-//     }
-//   )
-
-//   this.setState(
-//       {
-//         corporateEventoptions: corporateEvent
-//       }
-//     )
-//     this.setState(
-//       {
-//         cuisineoptions: cuisines
-//       }
-//     )
-//     this.setState(
-//       {
-//         dietaryoptions: dietary
-//       }
-//     )
-//     this.setState(
-//       {
-//         dishoptions: dish
-//       }
-//     )
-//     this.setState(
-//       {
-//         vendoroptions: vendortype
-//       }
-//     )
-//     this.setState(
-//       {
-//         logisticoptions: logistictype
-//       }
-//     )
-// }
 
   
 
@@ -239,6 +149,10 @@ const onFileChange = (e) => {
       
   };
 
+  const onSelect = () => {
+    console.log("parent function called")
+  }
+
 
 const [cateringoptions] = useState(data)
 const [cateringoptionsr] = useState(cateringType)
@@ -296,7 +210,7 @@ const [cateringoptionsr] = useState(cateringType)
                        value={cateringType}
                        onChange={(e) => {setCateringType(e.target.value)}}
                     /> */}
-                    <Catererselect />
+                    <Catererselect func = {onSelect}/>
                    
                     {/* <Multiselect options={cateringoptions} displayValue = "CateringType" />
                     <Multiselect options={cateringoptions} displayValue = "CateringType" />
