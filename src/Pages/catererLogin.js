@@ -6,7 +6,7 @@ import { assetsImages } from '../Constant/images';
 // import axios from '../api/axios';
 const LOGIN_URL = '/superadmin_login';
 
-const Login = () => {
+const AdminLogin = () => {
     const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
@@ -23,7 +23,7 @@ const Login = () => {
 
     useEffect(() =>{
         if(localStorage.getItem('user-info')){
-            history.push("/home")
+            history.push("/caterer")
         }
     },[])
 
@@ -36,7 +36,7 @@ const Login = () => {
 
       console.warn(email,password);
       let item = {email,password};
-      let result = await fetch("https://stg-backend.catersmart.in/api/superadmin_login" , {
+      let result = await fetch("https://stg-backend.catersmart.in/api/caterer_login" , {
           method : 'POST',
           headers: {
               "Content-Type":"application/json",
@@ -46,7 +46,7 @@ const Login = () => {
       });
       result = await result.json();
       localStorage.setItem("user-info", JSON.stringify(result))
-      history.push("/home")
+      history.push("/caterer")
     }
 
     return (
@@ -105,4 +105,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default AdminLogin
